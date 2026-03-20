@@ -119,6 +119,8 @@ execa: execa (default export)
 
 Un agent par fichier de dépendance. Chaque agent reçoit la portion du catalogue qui le concerne et crée le fichier correspondant dans `src/dependencies/`. Les fichiers de dépendances sont indépendants les uns des autres, donc zéro conflit.
 
+Pour implémenter chaque dépendance, le sous-agent peut généralement se baser sur les appels dans le code source TypeScript (`upstream/src/`) pour déduire l'API à reproduire. En cas de doute sur le comportement exact d'une lib, les `node_modules` du repo upstream sont disponibles (`upstream/node_modules/`) — les deps npm sont installées — et peuvent être consultés pour comprendre la signature, les options, ou le comportement d'une fonction.
+
 ### Phase 3 — Code applicatif (agents en parallèle par couche)
 
 On porte les fichiers par couches, du bas vers le haut. Au sein de chaque couche, les agents tournent en parallèle.
