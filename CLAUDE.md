@@ -164,7 +164,17 @@ En TypeScript, les imports de types sont effacés au runtime, donc pas de circul
 - Utiliser des `__init__.py` vides dans chaque dossier.
 - snake_case pour les noms de fichiers, fonctions, variables.
 - PascalCase pour les classes (comme en TypeScript).
-- Les interfaces TypeScript deviennent des dataclasses ou TypedDict selon le contexte.
 - Les enums TypeScript deviennent des Enum Python.
 - Les types union TypeScript deviennent des Union[] avec typing.
 - async/await TypeScript → async/await Python avec asyncio.
+
+### Objets JS → Python : dict vs dataclass
+
+En JavaScript, `{ foo: 1, bar: 2 }` est à la fois un objet littéral et une structure de données. En Python, on choisit selon l'usage dans le code TypeScript source :
+
+- **`@dataclass`** : quand le TS définit une `interface` ou un `type` nommé qui sert de structure avec des champs connus, et que le code accède aux champs par `.propriété` (ex: `SmaliPatch`, `ToolVersion`, `SmaliHead`).
+- **`dict`** : quand le TS passe un objet littéral anonyme (ex: options `{ zipalign: true }`, retour `{ usesAppBundle: true }`, context Listr). Le code Python accède alors par `result["key"]`, pas `result.key`.
+
+**Règle simple** : si le TS a un `interface`/`type` nommé → `@dataclass`. Si c'est un objet littéral inline → `dict`.
+
+**Piège courant** : quand une fonction retourne un dict, le code appelant doit utiliser `result["key"]` et non `result.key`. Attention aux `.` dans le code porté qui devraient être des `[""]`.
