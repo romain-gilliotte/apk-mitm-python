@@ -149,7 +149,7 @@ async def main():
             ]),
             file=sys.stderr,
         )
-        if platform.machine().startswith('arm'):
+        if platform.machine().startswith('arm') or platform.machine() == 'aarch64':
             show_arm_warning()
 
         sys.exit(1)
