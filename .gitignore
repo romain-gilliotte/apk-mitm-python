@@ -1,1 +1,6 @@
 /upstream/
+__pycache__/
+*.pyc
+/test-apks/
+/logs/
+.vscode/

@@ -137,6 +137,27 @@ On porte les fichiers par couches, du bas vers le haut. Au sein de chaque couche
 2. Traduire ligne à ligne en Python en respectant les règles strictes ci-dessus.
 3. Écrire le fichier Python résultant dans la structure cible.
 
+### Règle Phase 3 : ne pas modifier les dépendances
+
+Pendant la phase 3, les sous-agents **ne doivent jamais modifier** les fichiers dans `src/dependencies/`. Si un sous-agent rencontre un problème avec une dépendance (fonction manquante, signature incorrecte, comportement inattendu), il doit :
+
+1. Écrire le code applicatif en supposant que la dépendance sera corrigée plus tard (utiliser l'API attendue).
+2. Créer un fichier `dependency_issues/<nom_du_fichier_porté>.md` décrivant le problème : quelle dépendance, quelle fonction/méthode manquante ou incorrecte, et ce qui est attendu.
+
+Cela évite les éditions concurrentes sur les fichiers de dépendances quand plusieurs agents tournent en parallèle. Une passe de correction des dépendances sera faite après la phase 3.
+
+## Règle absolue : ne pas modifier le code sans demande explicite
+
+Ne jamais modifier un fichier source Python déjà porté sauf si l'utilisateur le demande explicitement. Quand un problème est détecté (import circulaire, bug, etc.), le signaler à l'utilisateur et attendre ses instructions avant de toucher au code.
+
+### Exception : imports circulaires
+
+En TypeScript, les imports de types sont effacés au runtime, donc pas de circulaire. Pour reproduire ce comportement en Python, il est OK d'utiliser `from __future__ import annotations` + `if TYPE_CHECKING:` pour les imports qui ne concernent que des types (ex: `TaskOptions`). Ceci est considéré comme faisant partie du port fidèle, pas comme une modification.
+
+## Tooling
+
+- **uv** est utilisé comme gestionnaire de projet/dépendances. Utiliser `uv run` pour exécuter du code Python (ex: `uv run python -c "..."`, `uv run python -m src.cli`).
+
 ## Convention Python
 
 - Pas de `if __name__ == "__main__"` sauf si le fichier TypeScript original a un point d'entrée équivalent.
