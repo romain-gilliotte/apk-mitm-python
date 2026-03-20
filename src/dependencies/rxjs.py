@@ -58,15 +58,14 @@ class Observable(Generic[T]):
 
     async def for_each(self, callback: Callable[[T], None]) -> None:
         import asyncio
-        future = asyncio.get_running_loop().create_future()
+        loop = asyncio.get_running_loop()
+        future = loop.create_future()
 
         def on_error(err):
-            if not future.done():
-                future.set_exception(err if isinstance(err, Exception) else Exception(str(err)))
+            loop.call_soon_threadsafe(lambda: future.done() or future.set_exception(err if isinstance(err, Exception) else Exception(str(err))))
 
         def on_complete():
-            if not future.done():
-                future.set_result(None)
+            loop.call_soon_threadsafe(lambda: future.done() or future.set_result(None))
 
         self.subscribe(lambda value: callback(value), on_error, on_complete)
         await future

@@ -46,4 +46,4 @@ async def _modify_manifest_task(context, decode_dir, debuggable, maps_api_key):
         maps_api_key,
     )
 
-    context["uses_app_bundle"] = result.uses_app_bundle
+    context["uses_app_bundle"] = result["usesAppBundle"]

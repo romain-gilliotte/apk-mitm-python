@@ -405,10 +405,11 @@ class Listr:
         self._tasks: List[ListrTaskObject] = []
 
         self.concurrency = 1
-        if self._options.get("concurrent") is True:
+        concurrent = self._options.get("concurrent")
+        if concurrent is True:
             self.concurrency = float("inf")
-        elif isinstance(self._options.get("concurrent"), (int, float)):
-            self.concurrency = self._options["concurrent"]
+        elif concurrent is not False and isinstance(concurrent, (int, float)):
+            self.concurrency = concurrent
 
         self._renderer_class = _get_renderer(
             self._options.get("renderer"),
