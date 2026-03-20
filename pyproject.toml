@@ -1,3 +1,7 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "apk-mitm-python"
 version = "0.1.0"
@@ -8,3 +12,9 @@ dependencies = [
     "httpx>=0.28.1",
     "platformdirs>=4.9.4",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["apk_mitm"]
+
+[project.scripts]
+apk-mitm-py = "apk_mitm.cli:main_sync"

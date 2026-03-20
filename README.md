@@ -37,7 +37,7 @@ uv sync
 ## Usage
 
 ```bash
-uv run python -m src.cli <path-to-apk>
+uv run apk-mitm-py <path-to-apk>
 ```
 
 ### Options
@@ -56,7 +56,7 @@ uv run python -m src.cli <path-to-apk>
 ### Example
 
 ```bash
-uv run python -m src.cli my-app.apk
+uv run apk-mitm-py my-app.apk
 # Output: my-app-patched.apk
 ```
 
@@ -65,7 +65,7 @@ uv run python -m src.cli my-app.apk
 The port mirrors the upstream structure with Python conventions (snake_case filenames):
 
 ```
-src/
+apk_mitm/
 ├── cli.py                 # CLI entry point
 ├── index.py               # Public API re-exports
 ├── patch_apk.py           # APK patching pipeline
@@ -77,7 +77,7 @@ src/
 └── utils/                 # Shared utilities
 ```
 
-The `src/dependencies/` layer wraps Python libraries to expose the same API as the original npm packages. This keeps the ported application code as close as possible to the TypeScript source.
+The `apk_mitm/dependencies/` layer wraps Python libraries to expose the same API as the original npm packages. This keeps the ported application code as close as possible to the TypeScript source.
 
 ## License
 

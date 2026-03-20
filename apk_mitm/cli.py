@@ -282,5 +282,8 @@ def show_arm_warning():
   }"""))
 
 
-if __name__ == "__main__":
+def main_sync():
     asyncio.run(main())
+
+if __name__ == "__main__":
+    main_sync()
