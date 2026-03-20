@@ -1,8 +1,8 @@
-from src.utils import fs
-from src.dependencies import path as path_utils
-from src.dependencies.execa import ExecaChildProcess
-from src.dependencies.rxjs import Observable
-from src.utils.observe_async import observe_async
+from apk_mitm.utils import fs
+from apk_mitm.dependencies import path as path_utils
+from apk_mitm.dependencies.execa import ExecaChildProcess
+from apk_mitm.dependencies.rxjs import Observable
+from apk_mitm.utils.observe_async import observe_async
 
 
 def observe_process(

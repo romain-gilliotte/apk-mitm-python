@@ -1,7 +1,7 @@
 import re
 
-from src.utils import fs
-from src.dependencies import path as path_utils
+from apk_mitm.utils import fs
+from apk_mitm.dependencies import path as path_utils
 
 
 # Generates the XML contents of the Network Security File.

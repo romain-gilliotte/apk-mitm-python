@@ -1,6 +1,6 @@
 from typing import List
 
-from src.tasks.smali.types import SmaliPatch, SmaliPatchSelector, SmaliMethodPatch
+from apk_mitm.tasks.smali.types import SmaliPatch, SmaliPatchSelector, SmaliMethodPatch
 
 # `return void;` in Smali.
 RETURN_VOID_SMALI = ['.locals 0', 'return-void']

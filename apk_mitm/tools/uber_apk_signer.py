@@ -1,6 +1,6 @@
-from src.utils.execute_jar import execute_jar
-from src.utils.observe_process import observe_process
-from src.tools.tool import Tool, ToolVersion
+from apk_mitm.utils.execute_jar import execute_jar
+from apk_mitm.utils.observe_process import observe_process
+from apk_mitm.tools.tool import Tool, ToolVersion
 
 
 class UberApkSigner(Tool):

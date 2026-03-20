@@ -1,4 +1,4 @@
-from src.dependencies import path
+from apk_mitm.dependencies import path
 
 # Build a glob pattern that works on POSIX and Windows.
 def build_glob(*components: str) -> str:

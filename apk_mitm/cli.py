@@ -6,19 +6,19 @@ import os.path
 import importlib.metadata
 from typing import TypedDict, Optional, Callable
 
-from src.dependencies import path
-from src.utils import fs
-from src.dependencies.yargs_parser import parse as parse_args
-from src.dependencies.chalk import chalk
-from src.dependencies.tempy import tempy
+from apk_mitm.dependencies import path
+from apk_mitm.utils import fs
+from apk_mitm.dependencies.yargs_parser import parse as parse_args
+from apk_mitm.dependencies.chalk import chalk
+from apk_mitm.dependencies.tempy import tempy
 
-from src.patch_apk import patch_apk, show_app_bundle_warning
-from src.patch_app_bundle import patch_xapk_bundle, patch_apks_bundle
+from apk_mitm.patch_apk import patch_apk, show_app_bundle_warning
+from apk_mitm.patch_app_bundle import patch_xapk_bundle, patch_apks_bundle
 
-from src.tools.apktool import Apktool, ApktoolOptions
-from src.tools.uber_apk_signer import UberApkSigner
-from src.tools.tool import Tool
-from src.utils.user_error import UserError
+from apk_mitm.tools.apktool import Apktool, ApktoolOptions
+from apk_mitm.tools.uber_apk_signer import UberApkSigner
+from apk_mitm.tools.tool import Tool
+from apk_mitm.utils.user_error import UserError
 
 
 class TaskOptions(TypedDict, total=False):
@@ -282,4 +282,5 @@ def show_arm_warning():
   }"""))
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

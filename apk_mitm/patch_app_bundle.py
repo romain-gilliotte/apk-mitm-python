@@ -1,16 +1,16 @@
 import json
 import platform
 
-from src.dependencies.cross_zip import unzip, zip
-from src.utils import fs
-from src.dependencies import path
-from src.dependencies.globby import globby
-from src.dependencies.listr import Listr
-from src.dependencies.execa import execa
+from apk_mitm.dependencies.cross_zip import unzip, zip
+from apk_mitm.utils import fs
+from apk_mitm.dependencies import path
+from apk_mitm.dependencies.globby import globby
+from apk_mitm.dependencies.listr import Listr
+from apk_mitm.dependencies.execa import execa
 
-from src.patch_apk import patch_apk
-from src.utils.observe_async import observe_async
-from src.utils.build_glob import build_glob
+from apk_mitm.patch_apk import patch_apk
+from apk_mitm.utils.observe_async import observe_async
+from apk_mitm.utils.build_glob import build_glob
 
 
 def patch_xapk_bundle(options):

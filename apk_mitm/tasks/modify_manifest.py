@@ -1,5 +1,5 @@
-from src.utils import fs
-from src.dependencies import xml_js
+from apk_mitm.utils import fs
+from apk_mitm.dependencies import xml_js
 
 
 async def modify_manifest(

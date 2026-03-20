@@ -1,5 +1,5 @@
-from src.utils import fs
-from src.dependencies import path
+from apk_mitm.utils import fs
+from apk_mitm.dependencies import path
 
 # Copies the certificate file at `source_path` to the correct location within
 # the APK's `decode_dir`, so it can then be referenced in the Network Security

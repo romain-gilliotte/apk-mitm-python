@@ -1,6 +1,6 @@
-from src.utils import fs
-from src.dependencies.rxjs import Observable
-from src.dependencies.follow_redirects import https
+from apk_mitm.utils import fs
+from apk_mitm.dependencies.rxjs import Observable
+from apk_mitm.dependencies.follow_redirects import https
 
 
 def download_file(url: str, path: str):

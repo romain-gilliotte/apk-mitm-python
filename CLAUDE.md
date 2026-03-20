@@ -17,46 +17,46 @@ Port ligne à ligne du repo TypeScript [apk-mitm](https://github.com/niklashigi/
 ```
 TypeScript (source)              Python (cible)
 ─────────────────────────────    ──────────────────────────────────
-src/cli.ts                   →  src/cli.py
-src/index.ts                 →  src/index.py
-src/patch_apk.ts             →  src/patch_apk.py
-src/patch_app_bundle.ts      →  src/patch_app_bundle.py
-src/tasks/apply_patches.ts   →  src/tasks/apply_patches.py
-src/tasks/check_prerequisites.ts → src/tasks/check_prerequisites.py
-src/tasks/copy_certificate_file.ts → src/tasks/copy_certificate_file.py
-src/tasks/create_netsec_config.ts → src/tasks/create_netsec_config.py
-src/tasks/disable_certificate_pinning.ts → src/tasks/disable_certificate_pinning.py
-src/tasks/download_tools.ts  →  src/tasks/download_tools.py
-src/tasks/modify_manifest.ts →  src/tasks/modify_manifest.py
-src/tasks/smali/parse_head.ts → src/tasks/smali/parse_head.py
-src/tasks/smali/patches.ts   →  src/tasks/smali/patches.py
-src/tasks/smali/process_file.ts → src/tasks/smali/process_file.py
-src/tasks/smali/types.ts     →  src/tasks/smali/types.py
-src/tools/apktool.ts         →  src/tools/apktool.py
-src/tools/tool.ts            →  src/tools/tool.py
-src/tools/uber_apk_signer.ts →  src/tools/uber_apk_signer.py
-src/utils/build_glob.ts      →  src/utils/build_glob.py
-src/utils/download_file.ts   →  src/utils/download_file.py
-src/utils/download_tool.ts   →  src/utils/download_tool.py
-src/utils/execute_jar.ts     →  src/utils/execute_jar.py
-src/utils/fs.ts              →  src/utils/fs.py
-src/utils/get_java_version.ts → src/utils/get_java_version.py
-src/utils/observe_async.ts   →  src/utils/observe_async.py
-src/utils/observe_listr.ts   →  src/utils/observe_listr.py
-src/utils/observe_process.ts →  src/utils/observe_process.py
-src/utils/user_error.ts      →  src/utils/user_error.py
+src/cli.ts                   →  apk_mitm/cli.py
+src/index.ts                 →  apk_mitm/index.py
+src/patch_apk.ts             →  apk_mitm/patch_apk.py
+src/patch_app_bundle.ts      →  apk_mitm/patch_app_bundle.py
+src/tasks/apply_patches.ts   →  apk_mitm/tasks/apply_patches.py
+src/tasks/check_prerequisites.ts → apk_mitm/tasks/check_prerequisites.py
+src/tasks/copy_certificate_file.ts → apk_mitm/tasks/copy_certificate_file.py
+src/tasks/create_netsec_config.ts → apk_mitm/tasks/create_netsec_config.py
+src/tasks/disable_certificate_pinning.ts → apk_mitm/tasks/disable_certificate_pinning.py
+src/tasks/download_tools.ts  →  apk_mitm/tasks/download_tools.py
+src/tasks/modify_manifest.ts →  apk_mitm/tasks/modify_manifest.py
+src/tasks/smali/parse_head.ts → apk_mitm/tasks/smali/parse_head.py
+src/tasks/smali/patches.ts   →  apk_mitm/tasks/smali/patches.py
+src/tasks/smali/process_file.ts → apk_mitm/tasks/smali/process_file.py
+src/tasks/smali/types.ts     →  apk_mitm/tasks/smali/types.py
+src/tools/apktool.ts         →  apk_mitm/tools/apktool.py
+src/tools/tool.ts            →  apk_mitm/tools/tool.py
+src/tools/uber_apk_signer.ts →  apk_mitm/tools/uber_apk_signer.py
+src/utils/build_glob.ts      →  apk_mitm/utils/build_glob.py
+src/utils/download_file.ts   →  apk_mitm/utils/download_file.py
+src/utils/download_tool.ts   →  apk_mitm/utils/download_tool.py
+src/utils/execute_jar.ts     →  apk_mitm/utils/execute_jar.py
+src/utils/fs.ts              →  apk_mitm/utils/fs.py
+src/utils/get_java_version.ts → apk_mitm/utils/get_java_version.py
+src/utils/observe_async.ts   →  apk_mitm/utils/observe_async.py
+src/utils/observe_listr.ts   →  apk_mitm/utils/observe_listr.py
+src/utils/observe_process.ts →  apk_mitm/utils/observe_process.py
+src/utils/user_error.ts      →  apk_mitm/utils/user_error.py
 ```
 
 Les noms de fichiers passent de camelCase/kebab-case à snake_case (convention Python).
 
-## Couche de dépendances : `src/dependencies/`
+## Couche de dépendances : `apk_mitm/dependencies/`
 
-Les dépendances TypeScript sont encapsulées dans `src/dependencies/`, un fichier par dépendance. Chaque fichier expose **la même interface** que le module TypeScript original (mêmes noms de fonctions/classes, mêmes signatures). L'implémentation interne utilise des libs Python, mais le code appelant n'a pas besoin de le savoir.
+Les dépendances TypeScript sont encapsulées dans `apk_mitm/dependencies/`, un fichier par dépendance. Chaque fichier expose **la même interface** que le module TypeScript original (mêmes noms de fonctions/classes, mêmes signatures). L'implémentation interne utilise des libs Python, mais le code appelant n'a pas besoin de le savoir.
 
-Cela permet au code porté de rester le plus proche possible de l'original : au lieu de réécrire les appels, on importe depuis `src.dependencies.<module>`.
+Cela permet au code porté de rester le plus proche possible de l'original : au lieu de réécrire les appels, on importe depuis `apk_mitm.dependencies.<module>`.
 
 ```
-src/dependencies/
+apk_mitm/dependencies/
 ├── __init__.py
 ├── chalk.py              # expose chalk.red(), chalk.green(), etc. → colorama en interne
 ├── yargs_parser.py       # expose parse(args) → argparse en interne
@@ -82,10 +82,10 @@ import chalk from 'chalk'
 ```
 Le code Python fait :
 ```python
-from src.dependencies.chalk import chalk
+from apk_mitm.dependencies.chalk import chalk
 ```
 
-L'interface exposée par chaque fichier dans `src/dependencies/` doit correspondre exactement à ce que le code TypeScript utilise (pas plus, pas moins). On n'implémente que les fonctions/méthodes réellement appelées dans le projet.
+L'interface exposée par chaque fichier dans `apk_mitm/dependencies/` doit correspondre exactement à ce que le code TypeScript utilise (pas plus, pas moins). On n'implémente que les fonctions/méthodes réellement appelées dans le projet.
 
 ## Code source upstream : `upstream/`
 
@@ -117,7 +117,7 @@ execa: execa (default export)
 
 ### Phase 2 — Dépendances (N agents en parallèle)
 
-Un agent par fichier de dépendance. Chaque agent reçoit la portion du catalogue qui le concerne et crée le fichier correspondant dans `src/dependencies/`. Les fichiers de dépendances sont indépendants les uns des autres, donc zéro conflit.
+Un agent par fichier de dépendance. Chaque agent reçoit la portion du catalogue qui le concerne et crée le fichier correspondant dans `apk_mitm/dependencies/`. Les fichiers de dépendances sont indépendants les uns des autres, donc zéro conflit.
 
 Pour implémenter chaque dépendance, le sous-agent peut généralement se baser sur les appels dans le code source TypeScript (`upstream/src/`) pour déduire l'API à reproduire. En cas de doute sur le comportement exact d'une lib, les `node_modules` du repo upstream sont disponibles (`upstream/node_modules/`) — les deps npm sont installées — et peuvent être consultés pour comprendre la signature, les options, ou le comportement d'une fonction.
 
@@ -125,11 +125,11 @@ Pour implémenter chaque dépendance, le sous-agent peut généralement se baser
 
 On porte les fichiers par couches, du bas vers le haut. Au sein de chaque couche, les agents tournent en parallèle.
 
-1. `src/utils/` + `src/tasks/smali/types.py` (feuilles, pas de deps internes)
-2. `src/tasks/smali/` (sauf types.py) + `src/tools/` (dépendent de utils)
-3. `src/tasks/` (dépendent de utils, tools, smali)
-4. `src/patch_apk.py` + `src/patch_app_bundle.py` (dépendent de tasks/tools)
-5. `src/cli.py` + `src/index.py` (dépendent de tout)
+1. `apk_mitm/utils/` + `apk_mitm/tasks/smali/types.py` (feuilles, pas de deps internes)
+2. `apk_mitm/tasks/smali/` (sauf types.py) + `apk_mitm/tools/` (dépendent de utils)
+3. `apk_mitm/tasks/` (dépendent de utils, tools, smali)
+4. `apk_mitm/patch_apk.py` + `apk_mitm/patch_app_bundle.py` (dépendent de tasks/tools)
+5. `apk_mitm/cli.py` + `apk_mitm/index.py` (dépendent de tout)
 
 ### Instructions pour chaque sous-agent
 
@@ -139,7 +139,7 @@ On porte les fichiers par couches, du bas vers le haut. Au sein de chaque couche
 
 ### Règle Phase 3 : ne pas modifier les dépendances
 
-Pendant la phase 3, les sous-agents **ne doivent jamais modifier** les fichiers dans `src/dependencies/`. Si un sous-agent rencontre un problème avec une dépendance (fonction manquante, signature incorrecte, comportement inattendu), il doit :
+Pendant la phase 3, les sous-agents **ne doivent jamais modifier** les fichiers dans `apk_mitm/dependencies/`. Si un sous-agent rencontre un problème avec une dépendance (fonction manquante, signature incorrecte, comportement inattendu), il doit :
 
 1. Écrire le code applicatif en supposant que la dépendance sera corrigée plus tard (utiliser l'API attendue).
 2. Créer un fichier `dependency_issues/<nom_du_fichier_porté>.md` décrivant le problème : quelle dépendance, quelle fonction/méthode manquante ou incorrecte, et ce qui est attendu.
@@ -156,7 +156,7 @@ En TypeScript, les imports de types sont effacés au runtime, donc pas de circul
 
 ## Tooling
 
-- **uv** est utilisé comme gestionnaire de projet/dépendances. Utiliser `uv run` pour exécuter du code Python (ex: `uv run python -c "..."`, `uv run python -m src.cli`).
+- **uv** est utilisé comme gestionnaire de projet/dépendances. Utiliser `uv run` pour exécuter du code Python (ex: `uv run python -c "..."`, `uv run python -m apk_mitm.cli`).
 
 ## Convention Python
 

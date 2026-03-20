@@ -1,8 +1,8 @@
 import asyncio
 
-from src.dependencies.chalk import chalk
-from src.dependencies.listr import Listr, ListrRenderer
-from src.dependencies.rxjs import Observable, Subscriber
+from apk_mitm.dependencies.chalk import chalk
+from apk_mitm.dependencies.listr import Listr, ListrRenderer
+from apk_mitm.dependencies.rxjs import Observable, Subscriber
 
 latest_subscriber: Subscriber[str] = None
 

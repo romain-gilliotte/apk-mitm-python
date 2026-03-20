@@ -2,12 +2,12 @@ import re
 from dataclasses import dataclass
 from typing import Optional
 
-from src.dependencies.rxjs import map
-from src.dependencies.chalk import chalk
+from apk_mitm.dependencies.rxjs import map
+from apk_mitm.dependencies.chalk import chalk
 
-from src.utils.execute_jar import execute_jar
-from src.utils.observe_process import observe_process
-from src.tools.tool import Tool, ToolVersion
+from apk_mitm.utils.execute_jar import execute_jar
+from apk_mitm.utils.observe_process import observe_process
+from apk_mitm.tools.tool import Tool, ToolVersion
 
 
 @dataclass

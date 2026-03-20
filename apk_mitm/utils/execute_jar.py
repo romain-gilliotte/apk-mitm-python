@@ -1,4 +1,4 @@
-from src.dependencies.execa import execa
+from apk_mitm.dependencies.execa import execa
 
 def execute_jar(path: str, args: list[str]):
     return execa('java', ['-jar', path, *args], {

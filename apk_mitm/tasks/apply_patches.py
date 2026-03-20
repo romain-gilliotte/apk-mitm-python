@@ -1,10 +1,10 @@
-from src.dependencies.path import join
-from src.dependencies.listr import Listr
+from apk_mitm.dependencies.path import join
+from apk_mitm.dependencies.listr import Listr
 
-from src.tasks.modify_manifest import modify_manifest
-from src.tasks.create_netsec_config import create_network_security_config
-from src.tasks.disable_certificate_pinning import disable_certificate_pinning
-from src.tasks.copy_certificate_file import copy_certificate_file
+from apk_mitm.tasks.modify_manifest import modify_manifest
+from apk_mitm.tasks.create_netsec_config import create_network_security_config
+from apk_mitm.tasks.disable_certificate_pinning import disable_certificate_pinning
+from apk_mitm.tasks.copy_certificate_file import copy_certificate_file
 
 
 def apply_patches(

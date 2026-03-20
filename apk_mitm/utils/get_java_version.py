@@ -1,7 +1,7 @@
 import re
 
-from src.dependencies.execa import execa, ExecaError
-from src.utils.user_error import UserError
+from apk_mitm.dependencies.execa import execa, ExecaError
+from apk_mitm.utils.user_error import UserError
 
 # Returns the major version of the system's default Java installation.
 async def get_java_version():

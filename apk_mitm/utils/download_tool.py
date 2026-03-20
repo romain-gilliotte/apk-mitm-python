@@ -1,15 +1,15 @@
 from __future__ import annotations
 import sys
 from typing import TYPE_CHECKING
-from src.utils import fs
-from src.dependencies.path import join
-from src.dependencies.env_paths import env_paths
-from src.dependencies.listr import ListrTask, ListrTaskWrapper
+from apk_mitm.utils import fs
+from apk_mitm.dependencies.path import join
+from apk_mitm.dependencies.env_paths import env_paths
+from apk_mitm.dependencies.listr import ListrTask, ListrTaskWrapper
 
 if TYPE_CHECKING:
-    from src.tools.tool import Tool
-from src.utils.observe_async import observe_async
-from src.utils.download_file import download_file
+    from apk_mitm.tools.tool import Tool
+from apk_mitm.utils.observe_async import observe_async
+from apk_mitm.utils.download_file import download_file
 
 cache_path = env_paths('apk-mitm', {'suffix': ''}).cache
 

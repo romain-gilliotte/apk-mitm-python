@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Optional
 
-from src.utils.download_tool import get_cached_path
+from apk_mitm.utils.download_tool import get_cached_path
 
 
 class Tool(ABC):

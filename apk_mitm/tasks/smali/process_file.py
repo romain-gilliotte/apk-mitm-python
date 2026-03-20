@@ -2,13 +2,13 @@ import platform
 import re
 from typing import Callable
 
-from src.utils import fs
-from src.dependencies.chalk import chalk
-from src.dependencies.escape_string_regexp import escape_string_regexp
+from apk_mitm.utils import fs
+from apk_mitm.dependencies.chalk import chalk
+from apk_mitm.dependencies.escape_string_regexp import escape_string_regexp
 
-from src.tasks.smali.parse_head import parse_smali_head, SmaliHead
-from src.tasks.smali.patches import smali_patches
-from src.tasks.smali.types import SmaliPatch
+from apk_mitm.tasks.smali.parse_head import parse_smali_head, SmaliHead
+from apk_mitm.tasks.smali.patches import smali_patches
+from apk_mitm.tasks.smali.types import SmaliPatch
 
 
 async def process_smali_file(

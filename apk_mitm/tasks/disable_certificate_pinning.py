@@ -1,9 +1,9 @@
-from src.dependencies.globby import globby
-from src.dependencies.listr import ListrTaskWrapper
+from apk_mitm.dependencies.globby import globby
+from apk_mitm.dependencies.listr import ListrTaskWrapper
 
-from src.utils.observe_async import observe_async
-from src.tasks.smali.process_file import process_smali_file
-from src.utils.build_glob import build_glob
+from apk_mitm.utils.observe_async import observe_async
+from apk_mitm.tasks.smali.process_file import process_smali_file
+from apk_mitm.utils.build_glob import build_glob
 
 
 async def disable_certificate_pinning(

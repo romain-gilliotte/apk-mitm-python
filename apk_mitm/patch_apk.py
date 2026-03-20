@@ -1,14 +1,14 @@
 import sys
 import asyncio
 
-from src.dependencies import path
-from src.utils import fs
-from src.dependencies.listr import Listr
-from src.dependencies.chalk import chalk
+from apk_mitm.dependencies import path
+from apk_mitm.utils import fs
+from apk_mitm.dependencies.listr import Listr
+from apk_mitm.dependencies.chalk import chalk
 
-from src.utils.observe_async import observe_async
-from src.tasks.apply_patches import apply_patches
-from src.tasks.check_prerequisites import check_prerequisites
+from apk_mitm.utils.observe_async import observe_async
+from apk_mitm.tasks.apply_patches import apply_patches
+from apk_mitm.tasks.check_prerequisites import check_prerequisites
 
 
 def patch_apk(options):

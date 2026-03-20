@@ -1,6 +1,6 @@
 import asyncio
 
-from src.dependencies.rxjs import Observable
+from apk_mitm.dependencies.rxjs import Observable
 
 # Wraps an async function and produces an `Observable` that reacts to the
 # function resolving (`complete` notification), rejecting (`error`

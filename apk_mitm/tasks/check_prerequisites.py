@@ -2,14 +2,14 @@ from __future__ import annotations
 import sys
 from typing import TYPE_CHECKING
 
-from src.dependencies.execa import execa
-from src.dependencies.listr import Listr
+from apk_mitm.dependencies.execa import execa
+from apk_mitm.dependencies.listr import Listr
 
 if TYPE_CHECKING:
-    from src.cli import TaskOptions
-from src.utils.get_java_version import get_java_version
-from src.utils.user_error import UserError
-from src.tasks.download_tools import download_tools
+    from apk_mitm.cli import TaskOptions
+from apk_mitm.utils.get_java_version import get_java_version
+from apk_mitm.utils.user_error import UserError
+from apk_mitm.tasks.download_tools import download_tools
 
 MIN_PYTHON_VERSION = 3
 MIN_JAVA_VERSION = 8
